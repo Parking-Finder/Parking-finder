@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
     Button,
     View,
@@ -11,6 +11,25 @@ import { LinearGradient } from "expo-linear-gradient";
 import SearchBar from "../ui/SearchBar"
 
 export default function Home({ navigation }) {
+  const [message, setMessage] = useState('No Reponse')
+
+  const getMessage = async () => {
+    try {
+      const response = await fetch('http://localhost:3000')
+      const json = await response.json();
+      setMessage(json);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getMessage()
+  }, [])
+
+
+
     return (
         <View style={styles.container}>
             <LinearGradient
@@ -20,7 +39,8 @@ export default function Home({ navigation }) {
                 style={styles.gradient}
             >
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>Parking Finder</Text>
+            <Text style={styles.headerText}>Parking Finder</Text>
+            <Text>{message}</Text>
                 </View>
 
                 <View style={styles.main}>
