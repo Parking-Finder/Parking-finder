@@ -8,6 +8,7 @@ import {
     Pressable,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import SearchBar from "../ui/SearchBar";
 
 export default function Map({ navigation }) {
     return (
@@ -20,19 +21,7 @@ export default function Map({ navigation }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
             >
-                <View style={styles.search}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="enter address"
-                    ></TextInput>
-
-                    <Pressable
-                        style={styles.button}
-                        onPress={() => navigation.navigate("Map")}
-                    >
-                        <Text style={styles.buttonText}>Submit</Text>
-                    </Pressable>
-                </View>
+               <SearchBar/>
                 <Button
                     title="Go to Home"
                     onPress={() => navigation.navigate("Home")}
@@ -47,16 +36,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        // border: "2px solid black",
-        // backgroundColor: "linear-gradient(rgb(255,255,255,0.5)",
     },
     main: {
         flex: 1,
         alignItems: "center",
         marginTop: "50%"
-        // justifyContent: "center",
-        // border: "2px solid black",
-        // backgroundColor: "linear-gradient(rgb(255,255,255,0.5)",
     },
     header: {
         marginTop: "10%",
@@ -76,11 +60,12 @@ const styles = StyleSheet.create({
         width: '15%',
         borderColor: 'black',
         borderRadius: 20,
-        marginLeft: 5
+        marginLeft: 5,
+        padding: 5
     },
     buttonText: {
         textAlign: 'center',
-        color: 'white'
+        color: 'white',
     },
     input: {
         height: 40,
