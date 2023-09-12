@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     },
     description: {
         marginBottom: 20,
+        color: 'rgba(36, 35, 33, 0.8)'
     },
     search: {
         flexDirection: "row",

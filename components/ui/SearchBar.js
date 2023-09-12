@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderWidth: 1,
         width: "20%",
-        borderColor: "black",
+        borderColor: 'rgba(52, 52, 52, 0.4)',
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
         borderRadius: 20,
         marginLeft: 5,
     },
@@ -63,11 +64,12 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        width: 200,
+        width: 220,
+        marginLeft: 30,
         borderWidth: 1,
-        borderColor: "black",
+        borderColor: 'rgba(52, 52, 52, 0.4)',
         borderRadius: "20px",
-        backgroundColor: "white",
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
         textAlign: "center",
     }
 })

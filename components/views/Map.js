@@ -21,11 +21,15 @@ export default function Map({ navigation }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
             >
+
+                <View>
+
                <SearchBar/>
                 <Button
                     title="Go to Home"
                     onPress={() => navigation.navigate("Home")}
                 />
+                </View>
             </LinearGradient>
         </View>
     );
@@ -35,7 +39,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
     },
     main: {
         flex: 1,
@@ -58,7 +62,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderWidth: 1,
         width: '15%',
-        borderColor: 'black',
         borderRadius: 20,
         marginLeft: 5,
         padding: 5
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
     gradient: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
         width: "100%",
         height: "100%",
     },
