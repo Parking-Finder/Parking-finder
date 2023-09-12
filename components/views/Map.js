@@ -21,7 +21,7 @@ export default function Map({ navigation }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
             >
-               <SearchBar/>
+               <SearchBar navigation={navigation}/>
                 <Button
                     title="Go to Home"
                     onPress={() => navigation.navigate("Home")}

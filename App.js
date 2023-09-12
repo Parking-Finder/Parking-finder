@@ -8,6 +8,7 @@ import Map from './components/views/Map'
 const Stack = createNativeStackNavigator(); 
 
 export default function App() {
+
   return (
     <NavigationContainer>
     <Stack.Navigator>
