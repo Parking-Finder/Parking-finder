@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         borderWidth: 1,
-        width: "20%",
+        width: 65,
         borderColor: 'rgba(52, 52, 52, 0.4)',
         backgroundColor: 'rgba(255, 255, 255, 0.3)',
         borderRadius: 20,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        width: 220,
+        width: 300,
         marginLeft: 30,
         borderWidth: 1,
         borderColor: 'rgba(52, 52, 52, 0.4)',

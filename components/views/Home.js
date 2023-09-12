@@ -40,26 +40,13 @@ export default function Home({ navigation }) {
             >
                 <View style={styles.header}>
             <Text style={styles.headerText}>Parking Finder</Text>
-            <Text>{message}</Text>
+            {/* <Text>{message}</Text> */}
                 </View>
 
                 <View style={styles.main}>
                     <Text style={styles.description}>
                         Enter an address to find parking nearby
                     </Text>
-
-                    {/* <View style={styles.search}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="enter address"
-                        ></TextInput>
-                        <Pressable
-                            style={styles.button}
-                            onPress={() => navigation.navigate("Map")}
-                        >
-                            <Text style={styles.buttonText}>Submit</Text>
-                        </Pressable>
-                    </View> */}
 
                     <SearchBar navigation={navigation}/>
                 </View>
@@ -88,7 +75,8 @@ const styles = StyleSheet.create({
     },
     description: {
         marginBottom: 20,
-        color: 'rgba(36, 35, 33, 0.8)'
+        color: 'rgba(36, 35, 33, 0.8)', 
+        fontSize: 16
     },
     search: {
         flexDirection: "row",
@@ -108,7 +96,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        width: 200,
+        width: 220,
         borderWidth: 1,
         borderColor: "black",
         borderRadius: "20px",
