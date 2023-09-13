@@ -13,11 +13,13 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
+    "bcrypt": "^5.1.1",
     "expo": "~49.0.10",
     "expo-linear-gradient": "~12.3.0",
     "expo-status-bar": "~1.6.0",
     "express": "^4.18.2",
     "nodemon": "^3.0.1",
+    "pg": "^8.11.3",
     "react": "18.2.0",
     "react-native": "0.72.4",
     "react-native-linear-gradient": "^2.8.3",

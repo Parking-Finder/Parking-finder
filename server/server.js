@@ -5,14 +5,28 @@ const PORT = 3000
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  // res.send({"message": "Hello World!"})
+// app.get('/', (req, res) => {
+//   // res.send({"message": "Hello World!"})
 
-  const message = JSON.stringify('Hello!!!')
+//   const message = JSON.stringify('Hello!!!')
 
-  return res.status(200).send(message);
-})
+//   return res.status(200).send(message);
+// })
 
+// app.get('/testdb', async (req, res) => {
+
+//   try {
+//     const data = await db.query('SELECT * FROM users')
+//     res.status(404).send(data.rows);
+//   }
+//   catch (err) {
+//     res.status(400).send('No data recieved')
+//   }
+
+// })
+
+//send data to routes
+require('./routes/userRoutes')(app);
 
 app.use('*', (req, res) => {
   res.status(404).send('The address doesn\'t exist')
