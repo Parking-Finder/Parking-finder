@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SearchBar from "../ui/SearchBar"
+import Header from "../ui/Header";
 
 export default function Home({ navigation }) {
   const [message, setMessage] = useState('No Reponse')
@@ -38,10 +39,9 @@ export default function Home({ navigation }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
             >
-                <View style={styles.header}>
-            <Text style={styles.headerText}>Parking Finder</Text>
-            {/* <Text>{message}</Text> */}
-                </View>
+
+                <Header/>
+
 
                 <View style={styles.main}>
                     <Text style={styles.description}>

@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import SearchBar from '../ui/SearchBar';
 import MapView, { Marker } from 'react-native-maps';
 import useLocationStore from '../../store/locationStore';
+import Header from '../ui/Header';
 
 export default function Map({ navigation }) {
 	const coordinates = useLocationStore(state => state.coordinates);
@@ -11,7 +12,10 @@ export default function Map({ navigation }) {
 	return (
 		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 			<LinearGradient colors={['#FF6666', '#FCAEAE', '#FFEADD']} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} style={styles.gradient}>
-				<Text style={styles.headerText}>Parking Finder</Text>
+
+
+            <Header/>
+            
 				<View style={styles.topSearch}>
 					<SearchBar navigation={navigation} />
 				</View>
@@ -35,7 +39,9 @@ export default function Map({ navigation }) {
 						></Marker>
 					</MapView>
 				</View>
+				<Button style={styles.homeButton} title='List View' onPress={() => navigation.navigate('List')} />
 				<Button style={styles.homeButton} title='Go to Home' onPress={() => navigation.navigate('Home')} />
+                
 			</LinearGradient>
 		</View>
 	);
@@ -55,6 +61,9 @@ const styles = StyleSheet.create({
 	},
 	map: {
 		marginTop: 15,
+        borderColor: 'grey',
+        borderRadius: 10,
+        borderWidth: 0.5,
 		...StyleSheet.absoluteFillObject
 	},
 	main: {
