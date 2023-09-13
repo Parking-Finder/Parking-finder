@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, Keyboard, Button, Pressable, Text } from 'react-native';
+import { StyleSheet, TextInput, View, Pressable, Text } from 'react-native';
 import useLocationStore from '../../store/locationStore';
-import { Feather, Entypo } from '@expo/vector-icons';
 
 const SearchBar = ({ navigation }) => {
 	const [search, setSearch] = useState('');
 	const setCoordinates = useLocationStore(state => state.setCoordinates);
+	const setParkingSpots = useLocationStore(state => state.setParkingSpots);
+	let coordinateValues;
 
 	const updateSearchPhrase = search => {
 		setSearch(search);
 	};
 
-	const handleSubmit = () => {
-		console.log(`User typed ${search}`);
+	const handleSubmit = async () => {
 		const address = search.replaceAll(' ', '+');
 
 		// find latitute and longitude
@@ -21,13 +21,27 @@ const SearchBar = ({ navigation }) => {
 				const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyBmKfbyyuNDy0umxTefp4yZjiXrFoGP4IE`);
 				const json = await response.json();
 				const newCoordinates = json.results[0].geometry.location;
-				setCoordinates(newCoordinates);
+				await setCoordinates(newCoordinates);
+				coordinateValues = newCoordinates;
 			} catch (err) {
 				console.log(err);
 			}
 		};
 
-		getCoordinates();
+		await getCoordinates();
+
+		const getParkingSpots = async () => {
+			try {
+				console.log(coordinateValues, 'coordinate values');
+				const response = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinateValues.lat},${coordinateValues.lng}&radius=1500&types=parking&key=AIzaSyBmKfbyyuNDy0umxTefp4yZjiXrFoGP4IE`);
+				const json = await response.json();
+				await setParkingSpots(json.results);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+
+		await getParkingSpots();
 
 		navigation.navigate('Map');
 	};
@@ -78,7 +92,7 @@ const styles = StyleSheet.create({
 		marginLeft: 30,
 		borderWidth: 1,
 		borderColor: 'rgba(52, 52, 52, 0.4)',
-		borderRadius: '20px',
+		borderRadius: 20,
 		backgroundColor: 'rgba(255, 255, 255, 0.9)',
 		textAlign: 'center'
 	}
