@@ -15,6 +15,8 @@
     "@react-navigation/native-stack": "^6.9.13",
     "bcrypt": "^5.1.1",
     "expo": "~49.0.10",
+    "expo-app-loading": "^2.1.1",
+    "expo-font": "^11.6.0",
     "expo-linear-gradient": "~12.3.0",
     "expo-status-bar": "~1.6.0",
     "express": "^4.18.2",

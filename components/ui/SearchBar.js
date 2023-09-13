@@ -1,6 +1,19 @@
-import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, Pressable, Text } from 'react-native';
-import useLocationStore from '../../store/locationStore';
+import React, { useState } from "react";
+import {
+    StyleSheet,
+    TextInput,
+    View,
+    Keyboard,
+    Button,
+    Pressable,
+    Text,
+    Dimensions,
+} from "react-native";
+import useLocationStore from "../../store/locationStore";
+import { Feather, Entypo } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+
+let { height, width } = Dimensions.get("window");
 
 const SearchBar = ({ navigation }) => {
 	const [search, setSearch] = useState('');
@@ -8,9 +21,9 @@ const SearchBar = ({ navigation }) => {
 	const setParkingSpots = useLocationStore(state => state.setParkingSpots);
 	let coordinateValues;
 
-	const updateSearchPhrase = search => {
-		setSearch(search);
-	};
+    const updateSearchPhrase = (search) => {
+        setSearch(search);
+    };
 
 	const handleSubmit = async () => {
 		const address = search.replaceAll(' ', '+');
@@ -44,54 +57,69 @@ const SearchBar = ({ navigation }) => {
 		navigation.navigate('Map');
 	};
 
-	return (
-		<View styles={styles.container}>
-			<View style={styles.search}>
-				<TextInput style={styles.input} placeholder='Enter location...' onChangeText={updateSearchPhrase} onSubmitEditing={handleSubmit} value={search} />
-				<Pressable style={styles.button} onPress={handleSubmit}>
-					<Text style={styles.buttonText}>Submit</Text>
-				</Pressable>
-			</View>
-		</View>
-	);
+    return (
+        <View styles={styles.container}>
+            <View style={styles.search}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter location..."
+                    onChangeText={updateSearchPhrase}
+                    onSubmitEditing={handleSubmit}
+                    value={search}
+                />
+                <Pressable style={styles.button} onPress={handleSubmit}>
+                    <Text style={styles.buttonText}>Submit</Text>
+                </Pressable>
+            </View>
+        </View>
+    );
 };
 
 export default SearchBar;
 
 // styles
 const styles = StyleSheet.create({
-	container: {
-		margin: 15,
-		justifyContent: 'flex-start',
-		alignItems: 'center',
-		flexDirection: 'row',
-		width: '90%'
-	},
-	search: {
-		flexDirection: 'row'
-	},
-	button: {
-		flexDirection: 'column',
-		justifyContent: 'center',
-		borderWidth: 1,
-		width: 65,
-		borderColor: 'rgba(52, 52, 52, 0.4)',
-		backgroundColor: 'rgba(255, 255, 255, 0.3)',
-		borderRadius: 20,
-		marginLeft: 5
-	},
-	buttonText: {
-		textAlign: 'center',
-		color: 'white'
-	},
-	input: {
-		height: 40,
-		width: 300,
-		marginLeft: 30,
-		borderWidth: 1,
-		borderColor: 'rgba(52, 52, 52, 0.4)',
-		borderRadius: 20,
-		backgroundColor: 'rgba(255, 255, 255, 0.9)',
-		textAlign: 'center'
-	}
+    container: {
+        margin: 15,
+        justifyContent: "flex-start",
+        alignItems: "center",
+        flexDirection: "row",
+        width: "90%",
+    },
+    search: {
+        flexDirection: "row",
+    },
+    button: {
+        flexDirection: "column",
+        justifyContent: "center",
+        borderWidth: 0.5,
+        width: 65,
+        borderColor: "rgba(52, 52, 52, 0.2)",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        backgroundColor: "rgba(221,55,55, 0.6)",
+        borderRadius: 15,
+        marginLeft: 5,
+    },
+    buttonText: {
+        textAlign: "center",
+        color: "white",
+        fontWeight: "600",
+    },
+    input: {
+        height: 40,
+        width: 300,
+        marginLeft: 30,
+        borderWidth: 1,
+        borderColor: "rgba(52, 52, 52, 0.4)",
+        borderRadius: 10,
+        backgroundColor: "rgba(255, 255, 255, 0.9)",
+        textAlign: "center",
+    },
 });
