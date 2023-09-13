@@ -32,7 +32,6 @@ const SearchBar = ({ navigation }) => {
 
 		const getParkingSpots = async () => {
 			try {
-				console.log(coordinateValues, 'coordinate values');
 				const response = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinateValues.lat},${coordinateValues.lng}&radius=1500&types=parking&key=AIzaSyBmKfbyyuNDy0umxTefp4yZjiXrFoGP4IE`);
 				const json = await response.json();
 				await setParkingSpots(json.results);
@@ -42,7 +41,6 @@ const SearchBar = ({ navigation }) => {
 		};
 
 		await getParkingSpots();
-
 		navigation.navigate('Map');
 	};
 

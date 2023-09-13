@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, View, Text, StyleSheet, TextInput, Pressable, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import SearchBar from '../ui/SearchBar';
@@ -9,9 +9,6 @@ import custom_pin from '../../assets/current-location.png';
 export default function Map({ navigation }) {
 	const coordinates = useLocationStore(state => state.coordinates);
 	const parkingSpots = useLocationStore(state => state.parkingSpots);
-	console.log(coordinates, 'new coordinates');
-	// console.log(parkingSpots, 'parking spots');
-	console.log(parkingSpots[0].geometry.location);
 
 	return (
 		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -24,7 +21,7 @@ export default function Map({ navigation }) {
 				<View style={styles.mapContainer}>
 					<MapView
 						style={styles.map}
-						initialRegion={{
+						region={{
 							latitude: coordinates.lat,
 							longitude: coordinates.lng,
 							latitudeDelta: 0.02,
