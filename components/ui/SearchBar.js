@@ -16,32 +16,45 @@ import { LinearGradient } from "expo-linear-gradient";
 let { height, width } = Dimensions.get("window");
 
 const SearchBar = ({ navigation }) => {
-    const [search, setSearch] = useState("");
-    const setCoordinates = useLocationStore((state) => state.setCoordinates);
+	const [search, setSearch] = useState('');
+	const setCoordinates = useLocationStore(state => state.setCoordinates);
+	const setParkingSpots = useLocationStore(state => state.setParkingSpots);
+	let coordinateValues;
 
     const updateSearchPhrase = (search) => {
         setSearch(search);
     };
 
-    const handleSubmit = () => {
-        console.log(`User typed ${search}`);
-        const address = search.replaceAll(" ", "+");
+	const handleSubmit = async () => {
+		const address = search.replaceAll(' ', '+');
 
-        // find latitute and longitude
-        const getCoordinates = async () => {
-            try {
-                const response = await fetch(
-                    `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyBmKfbyyuNDy0umxTefp4yZjiXrFoGP4IE`
-                );
-                const json = await response.json();
-                const newCoordinates = json.results[0].geometry.location;
-                setCoordinates(newCoordinates);
-            } catch (err) {
-                console.log(err);
-            }
-        };
+		// find latitute and longitude
+		const getCoordinates = async () => {
+			try {
+				const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyBmKfbyyuNDy0umxTefp4yZjiXrFoGP4IE`);
+				const json = await response.json();
+				const newCoordinates = json.results[0].geometry.location;
+				await setCoordinates(newCoordinates);
+				coordinateValues = newCoordinates;
+			} catch (err) {
+				console.log(err);
+			}
+		};
 
-        getCoordinates();
+		await getCoordinates();
+
+		const getParkingSpots = async () => {
+			try {
+				console.log(coordinateValues, 'coordinate values');
+				const response = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinateValues.lat},${coordinateValues.lng}&radius=1500&types=parking&key=AIzaSyBmKfbyyuNDy0umxTefp4yZjiXrFoGP4IE`);
+				const json = await response.json();
+				await setParkingSpots(json.results);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+
+		await getParkingSpots();
 
         navigation.navigate("Map");
     };

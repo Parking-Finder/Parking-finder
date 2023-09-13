@@ -12,24 +12,21 @@ import SearchBar from "../ui/SearchBar"
 import Header from "../ui/Header";
 
 export default function Home({ navigation }) {
-  const [message, setMessage] = useState('No Reponse')
+	// const [message, setMessage] = useState('No Reponse');
 
-  const getMessage = async () => {
-    try {
-      const response = await fetch('http://localhost:3000')
-      const json = await response.json();
-      setMessage(json);
-    }
-    catch (err) {
-      console.log(err);
-    }
-  }
+	// const getMessage = async () => {
+	// 	try {
+	// 		const response = await fetch('http://localhost:3000');
+	// 		const json = await response.json();
+	// 		setMessage(json);
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 
-  useEffect(() => {
-    getMessage()
-  }, [])
-
-
+	// useEffect(() => {
+	// 	getMessage();
+	// }, []);
 
     return (
         <View style={styles.container}>
@@ -43,16 +40,14 @@ export default function Home({ navigation }) {
                 <Header/>
 
 
-                <View style={styles.main}>
-                    <Text style={styles.description}>
-                        Enter an address to find parking nearby
-                    </Text>
+				<View style={styles.main}>
+					<Text style={styles.description}>Enter an address to find parking nearby</Text>
 
-                    <SearchBar navigation={navigation}/>
-                </View>
-            </LinearGradient>
-        </View>
-    );
+					<SearchBar navigation={navigation} />
+				</View>
+			</LinearGradient>
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({

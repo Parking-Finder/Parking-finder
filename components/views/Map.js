@@ -5,10 +5,15 @@ import SearchBar from '../ui/SearchBar';
 import MapView, { Marker } from 'react-native-maps';
 import useLocationStore from '../../store/locationStore';
 import Header from '../ui/Header';
+import custom_pin from '../../assets/current-location.png';
 
 export default function Map({ navigation }) {
 	const coordinates = useLocationStore(state => state.coordinates);
+	const parkingSpots = useLocationStore(state => state.parkingSpots);
 	console.log(coordinates, 'new coordinates');
+	// console.log(parkingSpots, 'parking spots');
+	console.log(parkingSpots[0].geometry.location);
+
 	return (
 		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 			<LinearGradient colors={['#FF6666', '#FCAEAE', '#FFEADD']} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} style={styles.gradient}>
@@ -26,8 +31,8 @@ export default function Map({ navigation }) {
 						initialRegion={{
 							latitude: coordinates.lat,
 							longitude: coordinates.lng,
-							latitudeDelta: 0.0922,
-							longitudeDelta: 0.0421
+							latitudeDelta: 0.02,
+							longitudeDelta: 0.015
 						}}
 					>
 						<Marker
@@ -36,7 +41,11 @@ export default function Map({ navigation }) {
 								latitude: coordinates.lat,
 								longitude: coordinates.lng
 							}}
+							image={custom_pin}
 						></Marker>
+						{parkingSpots.map(parkingSpot => (
+							<Marker coordinate={{ latitude: parkingSpot.geometry.location.lat, longitude: parkingSpot.geometry.location.lng }} key={parkingSpot.place_id} />
+						))}
 					</MapView>
 				</View>
 				<Button style={styles.homeButton} title='List View' onPress={() => navigation.navigate('List')} />
