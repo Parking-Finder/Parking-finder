@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { Button, View, Text, StyleSheet, TextInput, Pressable, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import SearchBar from '../ui/SearchBar';
@@ -9,6 +9,30 @@ import custom_pin from '../../assets/current-location.png';
 export default function Map({ navigation }) {
 	const coordinates = useLocationStore(state => state.coordinates);
 	const parkingSpots = useLocationStore(state => state.parkingSpots);
+    
+    // vitaly's ---------
+    const [markers, setMarkers] = useState([]);
+    const [markerColorStore, setMarkerColorStore] = useState({});
+
+    function addMarker (e) {
+       let newMarker = {
+            coordinate: e.nativeEvent.coordinate,
+            key: markers.length.toString(),
+        };
+
+        setMarkerColorStore({...markerColorStore, [markers.length.toString()]: 'green'})
+
+        setMarkers([...markers, newMarker]);
+    }
+
+    function changeMarkerColor(e, key) {
+        // console.log(e.nativeEvent)
+        // console.log('clicked')
+        // setMarkerColor(!markerColor);
+        markerColorStore[key] === 'green' ? setMarkerColorStore({...markerColorStore, key: 'red'}) : setMarkerColorStore({...markerColorStore, key: 'green'});
+        // setMarkerColor((currentColor) => currentColor = (currentColor === 'green' ? 'red' : 'green'));
+
+    }
 
 	return (
 		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -20,6 +44,7 @@ export default function Map({ navigation }) {
 
 				<View style={styles.mapContainer}>
 					<MapView
+                     onPress={addMarker}
 						style={styles.map}
 						region={{
 							latitude: coordinates.lat,
@@ -28,6 +53,18 @@ export default function Map({ navigation }) {
 							longitudeDelta: 0.015
 						}}
 					>
+
+
+                        {markers.map((marker) => (
+                        <Marker
+                            key={marker.key}
+                            coordinate={marker.coordinate}
+                            title={`Marker ${marker.key}`}
+                            pinColor={markerColorStore[marker.key]}
+                            onPress={() => {setMarkerColorStore(marker.key)}}
+                        />
+                        ))}
+                        
 						<Marker
 							draggable
 							coordinate={{
@@ -37,7 +74,9 @@ export default function Map({ navigation }) {
 							image={custom_pin}
 						></Marker>
 						{parkingSpots.map(parkingSpot => (
-							<Marker coordinate={{ latitude: parkingSpot.geometry.location.lat, longitude: parkingSpot.geometry.location.lng }} key={parkingSpot.place_id} />
+							<Marker  coordinate={{ latitude: parkingSpot.geometry.location.lat, longitude: parkingSpot.geometry.location.lng }} 
+                            key={parkingSpot.place_id} 
+                            />
 						))}
 					</MapView>
 				</View>
