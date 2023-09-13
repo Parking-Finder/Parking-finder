@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
     Button,
     View,
@@ -6,29 +6,34 @@ import {
     StyleSheet,
     TextInput,
     Pressable,
+    Image,
+    ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import SearchBar from "../ui/SearchBar"
+import SearchBar from "../ui/SearchBar";
+import useLocationStore from "../../store/locationStore";
+import Header from "../ui/Header";
 
 export default function List({ navigation }) {
-  const [message, setMessage] = useState('No Reponse')
+    const [message, setMessage] = useState("No Reponse");
+    const parkingSpots = useLocationStore((state) => state.parkingSpots);
 
-  const getMessage = async () => {
-    try {
-      const response = await fetch('http://localhost:3000')
-      const json = await response.json();
-      setMessage(json);
-    }
-    catch (err) {
-      console.log(err);
-    }
-  }
+    console.log(parkingSpots);
+    // console.log(parkingSpots[0].geometry.viewport);
 
-  useEffect(() => {
-    getMessage()
-  }, [])
+    const getMessage = async () => {
+        try {
+            const response = await fetch("http://localhost:3000");
+            const json = await response.json();
+            setMessage(json);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
-
+    useEffect(() => {
+        getMessage();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -38,35 +43,30 @@ export default function List({ navigation }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
             >
-                <View style={styles.header}>
-            <Text style={styles.headerText}>Parking Finder</Text>
-                </View>
 
-                <View style={styles.main}>
-                    <View style ={styles.listCard}>
-                        <Text>Card</Text>
-                    </View>
-                    <View style ={styles.listCard}>
-                        <Text>Card</Text>
-                    </View>
-                    <View style ={styles.listCard}>
-                        <Text>Card</Text>
-                    </View>
-                    <View style ={styles.listCard}>
-                        <Text>Card</Text>
-                    </View>
-                    <View style ={styles.listCard}>
-                        <Text>Card</Text>
-                    </View>
-                    <View style ={styles.listCard}>
-                        <Text>Card</Text>
-                    </View>
-                    <View style ={styles.listCard}>
-                        <Text>Card</Text>
-                    </View>
+                <Header/>
 
-                    <Button style={styles.homeButton} title='Back to Map' onPress={() => navigation.navigate('Map')} />
-                </View>
+                <ScrollView style ={styles.main}>
+                    {parkingSpots.map((parkingSpot) => (
+                        <View
+                            style={styles.listCard}
+                            key={parkingSpot.place_id}
+                        >
+                            <Text style={styles.titleText}>
+                                {parkingSpot.name}
+                            </Text>
+                            <Text style={styles.addressText}>
+                                {parkingSpot.vicinity}
+                            </Text>
+                            <Text>User Rating: {parkingSpot.rating}</Text>
+                        </View>
+                    ))}
+                </ScrollView>
+                <Button
+                    style={styles.homeButton}
+                    title="Back to Map"
+                    onPress={() => navigation.navigate("Map")}
+                />
             </LinearGradient>
         </View>
     );
@@ -78,10 +78,32 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    image: {
+        width: 20,
+        height: 20,
+    },
+    titleText: {
+        fontSize: 17,
+        fontWeight: "bold",
+        color: "rgba(70, 2, 2, 0.73)",
+        marginBottom: 6,
+    },
+    homeButton:{
+        marginTop: 4
+    },
+    addressText: {
+        fontSize: 12,
+        marginBottom: 6,
+    },
     main: {
         flex: 1,
-        alignItems: "center",
-        marginTop: "5%",
+        marginTop: "2%",
+        // width: 400,
+        maxHeight: 660,
+        // alignItems: "center",
+        // justifyContent: "center"
+        // borderColor: "black",
+        // borderWidth: 2,
     },
     header: {
         marginTop: "10%",
@@ -91,22 +113,21 @@ const styles = StyleSheet.create({
         fontSize: 40,
     },
     listCard: {
-        borderColor: 'black',
+        borderColor: "black",
         width: 380,
-        height: 75,
+        height: 80,
         borderWidth: 0.5,
-        borderColor: 'rgba(132, 131, 131, 0.8)',
-        backgroundColor: 'rgba(238, 238, 238, 0.4)',
+        borderColor: "rgba(132, 131, 131, 0.8)",
+        backgroundColor: "rgba(238, 238, 238, 0.4)",
         borderRadius: 10,
         margin: 5,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
     },
     gradient: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
         width: "100%",
         height: "100%",
     },

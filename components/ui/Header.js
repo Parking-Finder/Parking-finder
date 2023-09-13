@@ -10,7 +10,7 @@ import {
 
 const Header = () => {
   return (
-    <Text style={styles.headerText}>Parking Finder</Text>
+    <Text style={styles.headerText}>Parken</Text>
   )
 }
 
@@ -20,7 +20,9 @@ export default Header
 const styles = StyleSheet.create({
     headerText: {
         marginTop: "7%",
-        fontSize: 40,
+        fontSize: 50,
+        fontWeight: '800',
+        color: "rgba(177, 6, 6, 0.68)"
     },
    
 });

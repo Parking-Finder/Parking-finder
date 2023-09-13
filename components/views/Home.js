@@ -36,7 +36,6 @@ export default function Home({ navigation }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
             >
-
                 <Header/>
 
 

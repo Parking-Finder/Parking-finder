@@ -69,16 +69,6 @@ const SearchBar = ({ navigation }) => {
                     onSubmitEditing={handleSubmit}
                     value={search}
                 />
-                {/* <LinearGradient
-                    colors={["rgba(221,55,55, 0.6)", "rgba(0, 0,0,0.1)"]}
-                    style={styles.button}
-                    start={{ y: 0.0, x: 0.0 }}
-                    end={{ y: 1.5, x: 0.0 }}
-                >
-                    <Pressable onPress={handleSubmit}>
-                        <Text style={styles.buttonText}>Submit</Text>
-                    </Pressable>
-                </LinearGradient> */}
                 <Pressable style={styles.button} onPress={handleSubmit}>
                     <Text style={styles.buttonText}>Submit</Text>
                 </Pressable>

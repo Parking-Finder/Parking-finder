@@ -101,10 +101,11 @@ const styles = StyleSheet.create({
 		width: '15%',
 		borderRadius: 20,
 		marginLeft: 5,
-		padding: 5
+		padding: 5,
 	},
 	homeButton: {
-		marginTop: 30
+		marginTop: 30,
+        color: 'white'
 	},
 	buttonText: {
 		textAlign: 'center',
