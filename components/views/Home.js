@@ -12,21 +12,26 @@ import SearchBar from "../ui/SearchBar"
 import Header from "../ui/Header";
 
 export default function Home({ navigation }) {
-	// const [message, setMessage] = useState('No Reponse');
 
-	// const getMessage = async () => {
-	// 	try {
-	// 		const response = await fetch('http://localhost:3000');
-	// 		const json = await response.json();
-	// 		setMessage(json);
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// };
+  //TESTING SERVER:
+  // const [message, setMessage] = useState('No Reponse')
 
-	// useEffect(() => {
-	// 	getMessage();
-	// }, []);
+  // const getMessage = async () => {
+  //   try {
+  //     const response = await fetch('http://localhost:3000')
+  //     const json = await response.json();
+  //     setMessage(json);
+  //   }
+  //   catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getMessage()
+  // }, [])
+
+
 
     return (
         <View style={styles.container}>
