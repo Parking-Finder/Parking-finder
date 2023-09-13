@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     header: {
         marginTop: "10%",
         fontSize: 20,
+        fontFamily: 'Geneva'
     },
     headerText: {
         fontSize: 40,
